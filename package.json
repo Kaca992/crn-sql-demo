@@ -1,0 +1,48 @@
+{
+  "name": "crn-sql-demo",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "jest-expo": "~20.0.0",
+    "jest-expo-ts": "^20.0.0",
+    "react-devtools": "^2.5.0",
+    "react-native-debugger-open": "^0.3.12",
+    "react-native-scripts": "^1.3.0",
+    "react-native-typescript-transformer": "^1.1.3",
+    "react-test-renderer": "16.0.0-alpha.12",
+    "redux-devtools-extension": "^2.13.2",
+    "tslint": "^5.7.0"
+  },
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "node node_modules/jest/bin/jest.js --watch",
+    "debug": "concurrently \"tsc -w\" \"yarn run react-devtools\" ",
+    "react-devtools": "react-devtools"
+  },
+  "jest": {
+    "preset": "jest-expo-ts"
+  },
+  "dependencies": {
+    "@types/jest": "^20.0.8",
+    "@types/react": "^16.0.5",
+    "@types/react-native": "^0.47.8",
+    "@types/react-navigation": "^1.0.19",
+    "@types/react-redux": "^5.0.5",
+    "@types/react-test-renderer": "^15.5.4",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0",
+    "expo": "^20.0.0",
+    "react": "16.0.0-alpha.12",
+    "react-native": "^0.47.0",
+    "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "typescript": "^2.4.2"
+  }
+}
