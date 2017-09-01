@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, Button } from "react-native";
-import Counter from "../../components/counter/Counter";
-import * as counterActions from "../../actions/counter.actions";
 import {NavigationScreenProp, NavigationStackScreenOptions} from "react-navigation";
 import * as SCREEN from '../../constants/screen_keys';
+
+import InfoCard from '../../components/InfoCard/InfoCard';
 
 interface IMainProps {
     counterValue?: number;
@@ -22,8 +22,8 @@ function mapStateToProps(state): IMainProps {
 
 function mapDispatchToProps(dispatch): IMainProps{
     return {
-        onCounterClicked: (value: number) => dispatch(counterActions.incrementCounter(value)),
-        onResetClicked: () => dispatch(counterActions.resetCounter())
+        // onCounterClicked: (value: number) => dispatch(counterActions.incrementCounter(value)),
+        // onResetClicked: () => dispatch(counterActions.resetCounter())
     }
 }
 
@@ -41,9 +41,9 @@ class Main extends React.Component<IMainProps, IMainProps> {
         let value = this.props.counterValue ? this.props.counterValue : 0;
         const { navigate } = this.props.navigation;
         return (
-            <View style={styles.container}>
+            <View style={styles.container} >
                 <Button title="Go To Details" onPress={() => navigate(SCREEN.DETAILS)} />
-                <Counter value={value} onBtnClick={(value) => this._counterClicked(value)} onResetClick={() => this._counterReset()}/>
+                <InfoCard />
             </View>
         );
     }
@@ -61,8 +61,8 @@ class Main extends React.Component<IMainProps, IMainProps> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        // justifyContent: 'center',
+        // alignItems: 'center'
     },
 });
 
