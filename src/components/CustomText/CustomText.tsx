@@ -6,6 +6,7 @@ interface ICustomTextProp {
     children: string,
     textFont?: styles.TextFontType,
     isBold?: boolean,
+    isItalic?: boolean,
     style?: any
 }
 
@@ -15,11 +16,12 @@ class CustomText extends Component<ICustomTextProp, any> {
     }
     
     render() {
-        let {textFont = "text", isBold = false} = this.props;
+        let {textFont = "text", isBold = false, isItalic = false} = this.props;
 
         const textStyles = [
                 styles.TextSize[textFont],
-                isBold ? styles.TextWeight.bold : styles.TextWeight.normal,
+                isBold ? styles.FontWeight.bold : styles.FontWeight.normal,
+                isItalic ? styles.FontStyle.italic : styles.FontStyle.normal,
                 this.props.style
         ];
 

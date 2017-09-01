@@ -17,12 +17,21 @@ export const TextSize = StyleSheet.create({
         }
 });
 
-export const TextWeight = StyleSheet.create({
+export const FontWeight = StyleSheet.create({
     bold:{
         fontWeight: 'bold'
     },
     normal:{
         fontWeight: 'normal'
+    }
+})
+
+export const FontStyle = StyleSheet.create({
+    italic:{
+        fontStyle : 'italic'
+    },
+    normal:{
+        fontStyle : 'normal'
     }
 })
 

@@ -43,7 +43,9 @@ class Main extends React.Component<IMainProps, IMainProps> {
         return (
             <View style={styles.container} >
                 <Button title="Go To Details" onPress={() => navigate(SCREEN.DETAILS)} />
-                <InfoCard />
+                <InfoCard title='Dino-SQL' iconName='server' subTitle='test.local'/>
+                <InfoCard title='sql2014' iconName='server' subTitle='test.local'/>
+                <InfoCard title='test2323' iconName='server' subTitle='test.local'/>
             </View>
         );
     }

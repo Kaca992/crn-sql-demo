@@ -6,27 +6,27 @@ const styles = StyleSheet.create({
     container:{
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: common.PRIMARY_COLOR,
-        paddingHorizontal: helpers.mhscale(20),
-        minHeight: 128
+        backgroundColor: common.BACKGROUND_COLOR,
+        paddingHorizontal: helpers.mhscale(10),
+        minHeight: 84,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#DDDDDD',
     },
     container_cardInfo: {
         flex:10,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
-    container_cardInfo_icon:{
-        alignSelf:'flex-start'
-    },
-    container_cardInfo_detailsContainer:{
-        flex:2,
-        flexDirection:'column',
-        alignItems: 'flex-start'
-    },
+        container_cardInfo_icon:{
+            alignSelf:'center',
+            paddingRight: 5
+        },
+        container_cardInfo_detailsContainer:{
+            flex:2,
+            flexDirection: 'column'
+        },
     container_detailsBtn:{
         flex:1
-    },
-    text:{
-        color: 'red'
     }
 });
 
