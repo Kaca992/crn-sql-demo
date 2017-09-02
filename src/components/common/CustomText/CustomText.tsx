@@ -31,4 +31,4 @@ class CustomText extends Component<ICustomTextProp, any> {
     }
 }
 
-export default CustomText;
+export {CustomText, ICustomTextProp};

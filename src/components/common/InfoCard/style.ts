@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import * as common from '../../style/common';
-import * as helpers from '../../style/helpers';
+import * as common from '../../../style/common';
+import * as helpers from '../../../style/helpers';
 
 const styles = StyleSheet.create({
     container:{

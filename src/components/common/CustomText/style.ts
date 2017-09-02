@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
-import {BASE_FONT_SIZE} from '../../style/common';
-
-let baseFontSize = 16;
+import {BASE_FONT_SIZE} from '../../../style/common';
 
 export const TextSize = StyleSheet.create({
         h1:{
