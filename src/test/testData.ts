@@ -9,7 +9,7 @@ export const TestServers: ISQLServer[] = [
     
     {
         id: 'SQL2014.test.local',
-        sqlInstance: 'SQL2014',
+        sqlInstance: 'SQL2014444',
         domainName: 'test.local'
     },
 

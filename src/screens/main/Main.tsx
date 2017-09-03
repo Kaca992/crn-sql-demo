@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ScrollView, View, TouchableOpacity } from "react-native";
+import { Button, ScrollView, View, TouchableOpacity } from "react-native";
 import {NavigationScreenProp, NavigationStackScreenOptions} from "react-navigation";
 import { connect } from "react-redux";
 import { autobind } from 'core-decorators';
@@ -40,8 +40,9 @@ function mapDispatchToProps(dispatch): IMainProps{
 
 class Main extends React.Component<IMainProps, IMainState> {
     static navigationOptions: NavigationStackScreenOptions = {
-        title: 'SQL Demo',
-        headerTitle: "SQL Demo"
+        title: 'SQL Demo App',
+        headerTitle: "SQL Demo App",
+        headerRight: <Button title="Info" onPress={() => alert("bok")}/>
       };
 
     constructor(props: IMainProps) {
