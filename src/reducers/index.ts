@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import {counterReducer} from './counter.reducers';
+import {sqlServerReducer} from './sqlServer.reducer';
 
 const reducersApp = combineReducers({
-    counterReducer
+    sqlServerReducer
   })
 
   

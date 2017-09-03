@@ -15,10 +15,10 @@ const styles = StyleSheet.create({
     container_cardInfo: {
         flex:10,
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
         container_cardInfo_icon:{
-            alignSelf:'center',
             paddingRight: 5
         },
         container_cardInfo_detailsContainer:{

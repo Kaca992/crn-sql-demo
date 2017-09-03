@@ -3,10 +3,10 @@ import { TouchableOpacity ,View, Text, StyleSheet, Image } from 'react-native';
 import {autobind} from 'core-decorators';
 
 import CustomText from '../CustomText';
-import Icon from '../Icon';
-import PopupMenuBtn, {IPopupMenuBtnProps} from '../PopupMenuBtn';
+import Icon, {IIconProps} from '../Icon';
 
 import {styles} from './style';
+
 
 interface InfoCardProps {
     itemID: string,
@@ -14,10 +14,9 @@ interface InfoCardProps {
     subTitle?: string,
     iconName?: string,
 
-    detailsBtnEnabled?: boolean,
-    detailsBtnOptions?: IPopupMenuBtnProps
+    detailsBtnOptions?: IIconProps
 
-    onDetailsActionsClick?: (elementID: string, actionID: string) => any,
+    onDetailsClick?: (elementID: string) => any
     onClick?: (elementID: string) => any 
     // TODO tag list
 }
@@ -45,10 +44,10 @@ class InfoCard extends Component<InfoCardProps, {}> {
                     </View>               
                 </TouchableOpacity>
                 {
-                    this.props.detailsBtnEnabled ?
-                        <View style={styles.container_detailsBtn}>
-                            <PopupMenuBtn {...this.props.detailsBtnOptions} onActionSelect={this._onActionClicked}/>                   
-                        </View>  : null
+                    this.props.detailsBtnOptions ?
+                        <TouchableOpacity style={styles.container_detailsBtn} onPress={this._onDetailsClicked}>
+                            <Icon {...this.props.detailsBtnOptions} />                   
+                        </TouchableOpacity>  : null
                 }               
             </View>
             
@@ -63,8 +62,10 @@ class InfoCard extends Component<InfoCardProps, {}> {
     }
 
     @autobind
-    _onActionClicked(actionID: string) {
-        this.props.onDetailsActionsClick(this.props.itemID, actionID);
+    _onDetailsClicked() {
+        if(this.props.onDetailsClick){
+            this.props.onDetailsClick(this.props.itemID);
+        }       
     }
 }
 

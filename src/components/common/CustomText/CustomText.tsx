@@ -7,6 +7,7 @@ interface ICustomTextProp {
     textFont?: styles.TextFontType,
     isBold?: boolean,
     isItalic?: boolean,
+    color?:string,
     style?: any
 }
 
@@ -22,6 +23,7 @@ class CustomText extends Component<ICustomTextProp, any> {
                 styles.TextSize[textFont],
                 isBold ? styles.FontWeight.bold : styles.FontWeight.normal,
                 isItalic ? styles.FontStyle.italic : styles.FontStyle.normal,
+                {color: this.props.color},
                 this.props.style
         ];
 
