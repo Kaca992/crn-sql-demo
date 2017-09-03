@@ -17,40 +17,6 @@ export const TestServers: ISQLServer[] = [
         id: 'sqldev.test.local',
         sqlInstance: 'sqldev',
         domainName: 'test.local'
-    },
-    {
-        id: 'Dino-SQL.test.local1',
-        sqlInstance: 'Dino-SQL',
-        domainName: 'test.local'
-    },
-    
-    {
-        id: 'SQL2014.test.local1',
-        sqlInstance: 'SQL2014',
-        domainName: 'test.local'
-    },
-
-    {
-        id: 'sqldev.test.local1',
-        sqlInstance: 'sqldev',
-        domainName: 'test.local'
-    },
-    {
-        id: 'Dino-SQL.test.local2',
-        sqlInstance: 'Dino-SQL',
-        domainName: 'test.local'
-    },
-    
-    {
-        id: 'SQL2014.test.local2',
-        sqlInstance: 'SQL2014',
-        domainName: 'test.local'
-    },
-
-    {
-        id: 'sqldev.test.local2',
-        sqlInstance: 'sqldev',
-        domainName: 'test.local'
     }
 ];
 

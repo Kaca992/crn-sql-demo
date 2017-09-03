@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import * as common from '../../style/common';
+import {BACKGROUND_COLOR, PRIMARY_COLOR}  from '../../style/common';
 import * as helpers from '../../style/helpers';
 
 const styles = StyleSheet.create({
@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection:'column',
         alignItems: 'center',
-        justifyContent: 'center'      
+        justifyContent: 'center',
+        backgroundColor: BACKGROUND_COLOR      
     },
 
     serverListContainer: {
@@ -16,4 +17,6 @@ const styles = StyleSheet.create({
     }
 });
 
-export {styles};
+const actionBtnColor = PRIMARY_COLOR;
+
+export {styles, actionBtnColor};

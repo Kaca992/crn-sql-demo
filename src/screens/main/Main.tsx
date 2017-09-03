@@ -3,6 +3,7 @@ import { Button, ScrollView, View, TouchableOpacity } from "react-native";
 import {NavigationScreenProp, NavigationStackScreenOptions} from "react-navigation";
 import { connect } from "react-redux";
 import { autobind } from 'core-decorators';
+import ActionButton from 'react-native-action-button';
 
 import CustomText from '../../components/common/CustomText';
 import Icon from '../../components/common/Icon';
@@ -12,7 +13,7 @@ import PopupMenu from '../../components/common/PopupMenu';
 import * as SCREEN from '../../constants/screen_keys';
 import {ISQLServer} from '../../data/model/ISQLServer';
 
-import {styles} from './style';
+import {styles, actionBtnColor} from './style';
 
 interface IMainProps {
     sqlServerList?: ISQLServer[],
@@ -41,8 +42,7 @@ function mapDispatchToProps(dispatch): IMainProps{
 class Main extends React.Component<IMainProps, IMainState> {
     static navigationOptions: NavigationStackScreenOptions = {
         title: 'SQL Demo App',
-        headerTitle: "SQL Demo App",
-        headerRight: <Button title="Info" onPress={() => alert("bok")}/>
+        headerTitle: "SQL Demo App"
       };
 
     constructor(props: IMainProps) {
@@ -62,7 +62,8 @@ class Main extends React.Component<IMainProps, IMainState> {
                     {this.props.sqlServerList.map(
                         (sqlServer) => this._renderItem(sqlServer)
                     )}
-                </ScrollView> 
+                </ScrollView>
+                <ActionButton buttonColor={actionBtnColor} onPress={() => { alert("hi")}} />                
             </View>
         );
     }
