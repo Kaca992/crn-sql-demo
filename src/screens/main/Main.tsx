@@ -90,7 +90,7 @@ class Main extends React.Component<IMainProps, IMainState> {
     
     @autobind
     _onInfoClick(itemID: string) {
-        alert(itemID);
+        this.props.navigation.navigate(SCREEN.DETAILS, {itemID});
     }
 
     
@@ -107,7 +107,13 @@ class Main extends React.Component<IMainProps, IMainState> {
 
     @autobind
     _onDetailsActionClicked(elementID: string, actionKey: string){
-        alert("Action for" + elementID + "is " + actionKey);
+        switch(actionKey){
+            case "Details":
+                this._onInfoClick(elementID);
+                return;
+            default:
+                alert("Action for" + elementID + "is " + actionKey);
+        }       
     }
 
     @autobind
