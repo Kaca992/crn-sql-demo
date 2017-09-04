@@ -10,6 +10,8 @@ import Icon from '../../components/common/Icon';
 import InfoCard from '../../components/common/InfoCard';
 import PopupMenu from '../../components/common/PopupMenu';
 
+import {removeSqlConnection} from '../../actions/sqlServer.actions';
+
 import * as SCREEN from '../../constants/screen_keys';
 import {ISQLServer} from '../../data/model/ISQLServer';
 
@@ -17,6 +19,8 @@ import {styles, actionBtnColor} from './style';
 
 interface IMainProps {
     sqlServerList?: ISQLServer[],
+
+    onDeleteItemClicked?: (elementID: string) => any,
 
     navigation? : NavigationScreenProp<any, any>
 }
@@ -34,6 +38,7 @@ function mapStateToProps(state): IMainProps {
 
 function mapDispatchToProps(dispatch): IMainProps{
     return {
+        onDeleteItemClicked: (elementID: string) => dispatch(removeSqlConnection(elementID))
         // onCounterClicked: (value: number) => dispatch(counterActions.incrementCounter(value)),
         // onResetClicked: () => dispatch(counterActions.resetCounter())
     }
@@ -110,6 +115,9 @@ class Main extends React.Component<IMainProps, IMainState> {
         switch(actionKey){
             case "Details":
                 this._onInfoClick(elementID);
+                return;
+            case "Remove":
+                this.props.onDeleteItemClicked(elementID);
                 return;
             default:
                 alert("Action for" + elementID + "is " + actionKey);

@@ -1,10 +1,9 @@
 import {ActionTypeKeys} from '../constants/action_types';
 
-export function incrementCounter(payload: number) {
+export function removeSqlConnection(sqlServerID: string) {
   return (dispatch, newState) => {
     dispatch({
-      type: ActionTypeKeys.OTHER_ACTION,
-      payload});
+      type: ActionTypeKeys.REMOVE_SQL_CONNECTION,payload:{sqlServerID}});
   };
 }
   
