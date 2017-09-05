@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import * as styles from './style';
 
 interface ICustomTextProp {
-    children: string,
+    children: any,
     textFont?: styles.TextFontType,
     isBold?: boolean,
     isItalic?: boolean,

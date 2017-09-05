@@ -1,24 +1,6 @@
 import {ISQLServer} from '../data/model/ISQLServer';
 
-export const TestServers: ISQLServer[] = [
-    {
-        id: 'Dino-SQL.test.local',
-        sqlInstance: 'Dino-SQL',
-        domainName: 'test.local'
-    },
-    
-    {
-        id: 'SQL2014.test.local',
-        sqlInstance: 'SQL2014444',
-        domainName: 'test.local'
-    },
-
-    {
-        id: 'sqldev.test.local',
-        sqlInstance: 'sqldev',
-        domainName: 'test.local'
-    }
-];
+export const TestServers: string[] = ['Dino-SQL.test.local', 'SQL2014.test.local', 'sqldev.test.local']
 
 let TestServersById: {[sqlServerId: string]: ISQLServer} = {};
 TestServersById['Dino-SQL.test.local'] = {id: 'Dino-SQL.test.local',

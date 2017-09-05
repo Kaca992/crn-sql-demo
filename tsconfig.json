@@ -12,7 +12,8 @@
     "allowJs": true,
     "sourceMap": true,
     "moduleResolution": "node",
-    "skipLibCheck": true //because of the require conflict between node and react-native 
+    "skipLibCheck": true, //because of the require conflict between node and react-native 
+    "strict": true
   },
   "exclude": [
     "App.js",

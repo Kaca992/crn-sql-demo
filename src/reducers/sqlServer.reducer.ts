@@ -1,29 +1,33 @@
 import * as Store from '../store/index';
 import {ActionTypeKeys, IAction} from '../constants/action_types';
-import * as Immutable from 'seamless-immutable';
+import Immutable from 'seamless-immutable';
+import * as _ from "lodash"; 
 
 import {ISQLServer} from '../data/model/ISQLServer';
 
 import {TestServers, TestServersById} from '../test/testData';
 
-interface ISQLServerState {
-    sqlServers: ISQLServer[],
-    sqlServersById: {[sqlServerId: string]: ISQLServer}
+export interface ISQLServerState {
+    sqlServersById: {[sqlServerId: string]: ISQLServer},
+    allSqlServersIds: string[]
 }
 
-const initialState: ISQLServerState = {
-    sqlServers: TestServers,
-    sqlServersById: TestServersById
-}
+const initialState = Immutable({
+    sqlServersById: TestServersById,
+    allSqlServersIds: TestServers
+})
   
-export function sqlServerReducer(state: ISQLServerState = initialState, action: IAction): ISQLServerState {
+export function sqlServerReducer(state = initialState, action: IAction) {
     switch (action.type) {
       case ActionTypeKeys.REMOVE_SQL_CONNECTION:
         const sqlID = action.payload.sqlServerID;
-        let sqlServers = state.sqlServers.filter(x => x.id !== sqlID);
-        let sqlServersById = Immutable.from(state.sqlServersById);
-        delete sqlServersById[sqlID];
-        return {...state, sqlServers, sqlServersById};
+        let newSqlServersById = _.omit(state.sqlServersById, sqlID);
+        let newAllServersId = _.filter(state.allSqlServersIds, sqlServerId => {
+          return sqlServerId !== sqlID;
+        });
+
+        return state.set('sqlServersById', newSqlServersById)
+                    .set('allSqlServersIds', newAllServersId);
       case ActionTypeKeys.OTHER_ACTION:
         const newValue = action.payload
         return state;

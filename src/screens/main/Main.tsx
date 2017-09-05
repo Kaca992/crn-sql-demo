@@ -2,8 +2,10 @@ import * as React from "react";
 import { Button, ScrollView, View, TouchableOpacity } from "react-native";
 import {NavigationScreenProp, NavigationStackScreenOptions} from "react-navigation";
 import { connect } from "react-redux";
+import { createSelector } from 'reselect';
 import { autobind } from 'core-decorators';
 import ActionButton from 'react-native-action-button';
+import * as _ from "lodash"; 
 
 import CustomText from '../../components/common/CustomText';
 import Icon from '../../components/common/Icon';
@@ -11,18 +13,29 @@ import InfoCard from '../../components/common/InfoCard';
 import PopupMenu from '../../components/common/PopupMenu';
 
 import {removeSqlConnection} from '../../actions/sqlServer.actions';
+import {IStore} from '../../reducers';
 
 import * as SCREEN from '../../constants/screen_keys';
 import {ISQLServer} from '../../data/model/ISQLServer';
 
 import {styles, actionBtnColor} from './style';
 
+const getSqlById = (state:IStore) => state.sqlServerReducer.sqlServersById;
+const getAllSqlIds = (state:IStore) => state.sqlServerReducer.allSqlServersIds;
+
+export const getSqlServerInfos = createSelector(
+  [getAllSqlIds, getSqlById],
+  (allSqlIds, sqlInfoDict) => {
+         return _.map(allSqlIds, sqlId => sqlInfoDict[sqlId]);
+  }
+)
+
 interface IMainProps {
-    sqlServerList?: ISQLServer[],
+    sqlServerList: ISQLServer[],
 
-    onDeleteItemClicked?: (elementID: string) => any,
+    onDeleteItemClicked: (elementID: string) => any,
 
-    navigation? : NavigationScreenProp<any, any>
+    navigation : NavigationScreenProp<any, any>
 }
 
 interface IMainState {
@@ -30,13 +43,13 @@ interface IMainState {
     serverSelected: string;
 }
 
-function mapStateToProps(state): IMainProps {
+function mapStateToProps(state:IStore):any {
     return{
-        sqlServerList: state.sqlServerReducer.sqlServers
+        sqlServerList: getSqlServerInfos(state)
     }
 }
 
-function mapDispatchToProps(dispatch): IMainProps{
+function mapDispatchToProps(dispatch):any {
     return {
         onDeleteItemClicked: (elementID: string) => dispatch(removeSqlConnection(elementID))
         // onCounterClicked: (value: number) => dispatch(counterActions.incrementCounter(value)),
@@ -53,7 +66,7 @@ class Main extends React.Component<IMainProps, IMainState> {
     constructor(props: IMainProps) {
         super(props);
 
-        this.state = {modalIsVisible: false, serverSelected: null};
+        this.state = {modalIsVisible: false, serverSelected: ""};
       }
 
     render() {
@@ -126,7 +139,7 @@ class Main extends React.Component<IMainProps, IMainState> {
 
     @autobind
     _onModalHide(){
-        this.setState({modalIsVisible: false, serverSelected:null});
+        this.setState({modalIsVisible: false, serverSelected:""});
     }
 
     _generateDetailsActions(): Array<{actionKey: string, element: JSX.Element}> {
