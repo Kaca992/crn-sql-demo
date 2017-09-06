@@ -61,7 +61,7 @@ class Main extends React.Component<IMainProps, IMainState> {
     static navigationOptions: NavigationStackScreenOptions = {
         title: 'SQL Demo App',
         headerTitle: "SQL Demo App"
-      };
+    };
 
     constructor(props: IMainProps) {
         super(props);
@@ -81,7 +81,7 @@ class Main extends React.Component<IMainProps, IMainState> {
                         (sqlServer) => this._renderItem(sqlServer)
                     )}
                 </ScrollView>
-                <ActionButton buttonColor={actionBtnColor} onPress={() => { alert("hi")}} />                
+                <ActionButton buttonColor={actionBtnColor} onPress={() => { this._navigateTo(SCREEN.ADD_SERVER)}} />                
             </View>
         );
     }
@@ -113,9 +113,9 @@ class Main extends React.Component<IMainProps, IMainState> {
 
     
     @autobind
-    _navigateTo(screen: string){
+    _navigateTo(screen: string, params?: any){
         const { navigate } = this.props.navigation;
-        navigate(screen);
+        navigate(screen, params);
     }
 
     @autobind
@@ -131,6 +131,10 @@ class Main extends React.Component<IMainProps, IMainState> {
                 return;
             case "Remove":
                 this.props.onDeleteItemClicked(elementID);
+                return;
+            case "Edit":
+                let server = _.find(this.props.sqlServerList, sqlServer => sqlServer.id === elementID );
+                this._navigateTo(SCREEN.EDIT_SERVER, {server, isEdit: true});
                 return;
             default:
                 alert("Action for" + elementID + "is " + actionKey);

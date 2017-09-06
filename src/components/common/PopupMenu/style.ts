@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
         alignSelf:'center',
         maxHeight:40,
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderBottomColor: '#DDDDDD',
+        borderBottomColor: 'black',
         marginBottom: 10
     },
 
