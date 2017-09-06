@@ -30,6 +30,16 @@ export function sqlServerReducer(state = initialState, action: IAction) {
 
         return state.set('sqlServersById', newSqlServersById)
                     .set('allSqlServersIds', newAllServersId);
+      case ActionTypeKeys.ADD_SQL_CONNECTION:
+        let sqlInformation = action.payload.sqlServerInfo as ISQLServer;
+        sqlInformation.id = state.sqlServerPrimaryKeyCounter.toString();
+
+        let concatedServers = _.concat(state.allSqlServersIds, [sqlInformation.id]);
+        return state.merge({
+          sqlServerPrimaryKeyCounter: state.sqlServerPrimaryKeyCounter + 1,
+          allSqlServersIds: concatedServers,
+          sqlServersById: Immutable(state.sqlServersById).merge({[sqlInformation.id]: sqlInformation})
+        });
       case ActionTypeKeys.OTHER_ACTION:
         const newValue = action.payload
         return state;

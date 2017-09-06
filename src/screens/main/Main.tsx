@@ -55,8 +55,6 @@ function mapStateToProps(state:IStore):any {
 function mapDispatchToProps(dispatch):any {
     return {
         onDeleteItemClicked: (elementID: string) => dispatch(removeSqlConnection(elementID))
-        // onCounterClicked: (value: number) => dispatch(counterActions.incrementCounter(value)),
-        // onResetClicked: () => dispatch(counterActions.resetCounter())
     }
 }
 
@@ -138,11 +136,11 @@ class Main extends React.Component<IMainProps, IMainState> {
             case "Remove":
                 this.props.onDeleteItemClicked(elementID);
                 return;
-            case "Edit":
-                let server = this._getSqlServerInformation(elementID);
-                let credential = server ? this._getSqlServerCredentials(server.credentialId) : null; 
-                this._navigateTo(SCREEN.EDIT_SERVER, {server, credential, isEdit: true});
-                return;
+            // case "Edit":
+            //     let server = this._getSqlServerInformation(elementID);
+            //     let credential = server ? this._getSqlServerCredentials(server.credentialId) : null; 
+            //     this._navigateTo(SCREEN.EDIT_SERVER, {server, credential, isEdit: true});
+            //     return;
             default:
                 alert("Action for" + elementID + "is " + actionKey);
         }       

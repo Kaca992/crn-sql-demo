@@ -26,6 +26,9 @@ export const AppStackNavigator = StackNavigator({
     },
     Details: {
       screen: DetailsTabNavigator,
+      navigationOptions: {
+        title: 'Details',
+        headerTitle: 'Details'}
     },
     AddServer : {
       screen: AddEditServer,
