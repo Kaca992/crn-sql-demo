@@ -17,6 +17,7 @@ import {IStore} from '../../reducers';
 
 import * as SCREEN from '../../constants/screen_keys';
 import {ISQLServer} from '../../data/model/ISQLServer';
+import {ICredential} from '../../data/model/ICredential';
 
 import {styles, actionBtnColor} from './style';
 
@@ -32,6 +33,7 @@ export const getSqlServerInfos = createSelector(
 
 interface IMainProps {
     sqlServerList: ISQLServer[],
+    credentialsById: {[credentialId: string]: ICredential}
 
     onDeleteItemClicked: (elementID: string) => any,
 
@@ -45,7 +47,8 @@ interface IMainState {
 
 function mapStateToProps(state:IStore):any {
     return{
-        sqlServerList: getSqlServerInfos(state)
+        sqlServerList: getSqlServerInfos(state),
+        credentialsById: state.credentialsReducer.credentialsById
     }
 }
 
@@ -73,9 +76,12 @@ class Main extends React.Component<IMainProps, IMainState> {
         let actions = this._generateDetailsActions();
         let containerOpacity = this.state.modalIsVisible ? {opacity:0.6} : {opacity:1};
 
+        let selectedServerInfo = this._getSqlServerInformation(this.state.serverSelected);
+        let sqlServerTitle = selectedServerInfo ? selectedServerInfo.fqdn : "";
+
         return (
             <View style={[styles.container, containerOpacity]}>
-                <PopupMenu menuTitle={this.state.serverSelected} elementID={this.state.serverSelected} actions={actions} isVisible={this.state.modalIsVisible} onMenuHide={this._onModalHide} onActionClick={this._onDetailsActionClicked}/>                   
+                <PopupMenu menuTitle={sqlServerTitle} elementID={this.state.serverSelected} actions={actions} isVisible={this.state.modalIsVisible} onMenuHide={this._onModalHide} onActionClick={this._onDetailsActionClicked}/>                   
                 <ScrollView style={styles.serverListContainer}>
                     {this.props.sqlServerList.map(
                         (sqlServer) => this._renderItem(sqlServer)
@@ -92,9 +98,9 @@ class Main extends React.Component<IMainProps, IMainState> {
             <InfoCard
                 key={item.id} 
                 itemID={item.id}
-                title={item.sqlInstance}
+                title={item.fqdn}
                 iconName='server'
-                subTitle={item.domainName}
+                subTitle={this._getSqlServerCredentials(item.credentialId).userName}
                 onClick={this._onInfoClick}
                 onDetailsClick={this._onDetailsClicked}
                 detailsBtnOptions={{
@@ -133,8 +139,9 @@ class Main extends React.Component<IMainProps, IMainState> {
                 this.props.onDeleteItemClicked(elementID);
                 return;
             case "Edit":
-                let server = _.find(this.props.sqlServerList, sqlServer => sqlServer.id === elementID );
-                this._navigateTo(SCREEN.EDIT_SERVER, {server, isEdit: true});
+                let server = this._getSqlServerInformation(elementID);
+                let credential = server ? this._getSqlServerCredentials(server.credentialId) : null; 
+                this._navigateTo(SCREEN.EDIT_SERVER, {server, credential, isEdit: true});
                 return;
             default:
                 alert("Action for" + elementID + "is " + actionKey);
@@ -153,6 +160,16 @@ class Main extends React.Component<IMainProps, IMainState> {
         actions.push({actionKey: "Remove", element: <Icon color="red" style={{flex:1, flexDirection:'row', justifyContent:'center', alignItems:'center'}} name="delete" size="med" text="Remove"/> });
 
         return actions;
+    }
+
+    @autobind
+    _getSqlServerInformation(sqlServerId: string) {
+        return _.find(this.props.sqlServerList, sqlServer => sqlServer.id === sqlServerId );
+    }
+
+    @autobind
+    _getSqlServerCredentials(credentialId: string) {
+        return this.props.credentialsById[credentialId];
     }
 }
 

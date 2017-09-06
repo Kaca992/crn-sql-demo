@@ -1,9 +1,6 @@
 export interface ISQLServer {
     id: string,
-    sqlInstance: string,
-    domainName: string
+    fqdn: string,
+    credentialId: string
 }
 
-export interface ISQLServerInformation {
-    sqlID: string
-}

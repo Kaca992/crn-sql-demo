@@ -5,6 +5,7 @@ import {NavigationScreenProp, NavigationStackScreenOptions} from "react-navigati
 import CustomText from '../../components/common/CustomText';
 
 import {ISQLServer} from '../../data/model/ISQLServer';
+import {ICredential} from '../../data/model/ICredential';
 
 import {styles} from './style';
 
@@ -14,7 +15,8 @@ interface IAddEditServerProps {
 
 interface IAddEditServerState {
     isEdit: boolean,
-    server: ISQLServer
+    server: ISQLServer,
+    credential: ICredential
 }
 
 // create a component
@@ -27,14 +29,17 @@ class AddEditServer extends Component<IAddEditServerProps, IAddEditServerState> 
     }
     
     render() {
+        let fqdn = this.state.server ? this.state.server.fqdn : undefined;
+
         return (
             <View style={styles.container}>
                 <View>
                     <CustomText style={styles.headerElement} isBold={true} textFont='h2'>SQL Server</CustomText>
                     <TextInput style={styles.inputElement}
                             onChangeText={(serverId) => this.setState({server : {...this.state.server ,id: serverId} })} 
-                            value={this.state.server.id}
-                            underlineColorAndroid = "transparent" />
+                            value={fqdn}
+                            underlineColorAndroid = "transparent" 
+                            placeholder = "Enter server name"/>
                 </View>
                 <View>
                     <CustomText style={styles.headerElement} isBold={true} textFont='h2'>Credentials</CustomText>

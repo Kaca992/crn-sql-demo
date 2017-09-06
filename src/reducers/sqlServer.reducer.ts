@@ -9,12 +9,14 @@ import {TestServers, TestServersById} from '../test/testData';
 
 export interface ISQLServerState {
     sqlServersById: {[sqlServerId: string]: ISQLServer},
-    allSqlServersIds: string[]
+    allSqlServersIds: string[],
+    sqlServerPrimaryKeyCounter: number
 }
 
 const initialState = Immutable({
     sqlServersById: TestServersById,
-    allSqlServersIds: TestServers
+    allSqlServersIds: TestServers,
+    sqlServerPrimaryKeyCounter: 4
 })
   
 export function sqlServerReducer(state = initialState, action: IAction) {

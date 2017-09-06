@@ -1,16 +1,28 @@
 import {ISQLServer} from '../data/model/ISQLServer';
+import {ICredential} from '../data/model/ICredential';
 
-export const TestServers: string[] = ['Dino-SQL.test.local', 'SQL2014.test.local', 'sqldev.test.local']
+export const TestServers: string[] = ["0","1","2"];
 
 let TestServersById: {[sqlServerId: string]: ISQLServer} = {};
-TestServersById['Dino-SQL.test.local'] = {id: 'Dino-SQL.test.local',
-                    sqlInstance: 'Dino-SQL',
-                    domainName: 'test.local'}; 
-TestServersById['SQL2014.test.local'] = {id: 'SQL2014.test.local',
-                    sqlInstance: 'SQL2014',
-                    domainName: 'test.local'}; 
-TestServersById['sqldev.test.local'] = {id: 'sqldev.test.local',
-                    sqlInstance: 'sqldev',
-                    domainName: 'test.local'}; 
+TestServersById["0"] = {id: "0",
+                    fqdn: 'Dino-SQL.test.local',
+                    credentialId: "0"}; 
+TestServersById["1"] = {id: "1",
+                      fqdn: 'SQL2014.test.local',
+                      credentialId: "0"}; 
+TestServersById["2"] = {id: "2",
+                      fqdn: 'sqldev.test.local',
+                      credentialId: "0"}; 
 
-export {TestServersById};
+export const TestCredentials: string[] = ["0"];
+
+let TestCredentialsById: {[credentialId: string]: ICredential} = {
+    "0" : {
+        id: "0",
+        userName: 'sqltest',
+        passWord: 'pass@word1'
+    }
+};
+
+
+export {TestServersById, TestCredentialsById};
