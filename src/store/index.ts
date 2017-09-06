@@ -3,9 +3,10 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { autoRehydrate } from 'redux-persist';
 import thunk from "redux-thunk";
 import reducersApp from '../reducers';
-import logger from './logger';
+// import logger from './logger';
 
-let middleware = [thunk, logger];
+// let middleware = [thunk, logger];
+let middleware = [thunk];
 
 function configureStore(initialState){
     const store: any = createStore(reducersApp, composeWithDevTools(
